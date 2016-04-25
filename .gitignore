@@ -1,5 +1,3 @@
 *.swp
-*.pbxproj
-*.xcuserstate
-*.xcuserdatad*
+.DS_Store
 
