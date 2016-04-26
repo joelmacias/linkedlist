@@ -17,6 +17,7 @@ struct node{
 	std::string drugName; 
 	int schedule;
 	node* next; 
+	node(std::string, int); 
 }; 
 
 class LinkedList{
@@ -55,6 +56,8 @@ class LinkedList{
 
 		// destructor
 		~LinkedList();
+		
+		int returnLength();
 
 };
 #endif
