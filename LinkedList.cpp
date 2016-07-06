@@ -3,7 +3,7 @@ LinkedList.cpp
 */
 
 #include "LinkedList.h" 
-
+#include <algorithm>
 
 // struct constructor
 
@@ -90,8 +90,7 @@ void LinkedList::tailRemove(){
         head = NULL;
         tail = NULL;
         delete temp;
-        listLength--;
-        print(); 
+        listLength--; 
         return;
     }
     
@@ -115,13 +114,11 @@ void LinkedList::tailRemove(){
     tail -> next = NULL;
     listLength--;
     
-    delete nodeToRemove;
-    
-    print();
+    delete nodeToRemove; 
 }
 
 
-void LinkedList::insertAtIndex(node* newNode, int index){
+void LinkedList::insertAtPosition(node* newNode, int index){
     
     if (index <= 0) {
         std::cout << "\nIndex to insert cannot be less than 1\n";
@@ -175,4 +172,66 @@ LinkedList::~LinkedList(){
 
 int LinkedList::returnLength(){
 	return listLength;
+}
+
+void LinkedList::headRemove(){
+	
+	if(listLength == 0){
+		std::cout<<"\nList empty, cannot remove.\n";
+		return;
+	}
+
+	if(listLength == 1){
+
+		delete head; 
+		head = NULL; 
+		tail = NULL;
+		listLength--;
+		return;
+	}
+	
+	node* temp = head;
+	head = head->next;
+	delete temp; 
+	listLength--;
+}
+
+void LinkedList::removeByName(std::string name){
+
+	std::string userInputDrugName = name;
+	std::string tempDrugName = "";
+	if(listLength == 0){
+		std::cout<<"List is empty. Cannot remove from an empty list.\n";
+		return;
+	}
+	
+	std::transform(name.begin(), name.end(), name.begin(), ::tolower);
+	node* temp = head;
+	node* previous = head;
+	for(int i = 0; i < listLength; i++){
+
+		tempDrugName = temp -> drugName;
+		std::transform(tempDrugName.begin(), tempDrugName.end(), tempDrugName.begin(), ::tolower);
+
+		if(tempDrugName == name){
+
+			if(i == 0){
+				headRemove();
+				return;
+			}
+			if(i == listLength-1){
+				tailRemove();	
+				return;
+			}	
+
+			previous -> next = temp -> next;
+			delete temp; 
+			listLength--;
+			return;
+		}	
+		previous = temp;
+		temp = temp -> next; 	
+	}
+
+	std::cout<< userInputDrugName << " is not in the linked list.\n"; 
 }

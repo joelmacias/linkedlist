@@ -1,15 +1,11 @@
 /*
 LinkedList.h
-
 */
 
 #ifndef LinkedList_h
 #define LinkedList_h
 #include <iostream>
 #include <string>
-
-
-
 
 //Node struct to represent drug name, and schedule drug is in
 
@@ -47,9 +43,11 @@ class LinkedList{
     
         // Remove a node at tail
         void tailRemove();
-    
+   
+		// Reomve a node from head
+		void headRemove(); 
         // insert at index
-        void insertAtIndex(node*, int);
+        void insertAtPosition(node*, int);
     
 		// Print list
 		void print(); 
@@ -59,5 +57,6 @@ class LinkedList{
 		
 		int returnLength();
 
+		void removeByName(std::string);
 };
 #endif
